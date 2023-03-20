@@ -1,10 +1,10 @@
 import React from "react";
 import { ContactsItem } from "components/ContactsItem";
-import {ContactsListWrapper} from './ContactList.styled';
+import {ContactsListWrapper, ContactsTitle} from './ContactList.styled';
 
 export const ContactsList = ({contacts, onDeleteContact}) => (
         <ContactsListWrapper>
-            <h2>Contacts</h2>
+            <ContactsTitle>Contacts</ContactsTitle>
             {contacts.map(({id, name, number}) => (
                 <li key={id} >
                     <ContactsItem id={id} name={name} number={number} onDeleteContact={onDeleteContact}/>

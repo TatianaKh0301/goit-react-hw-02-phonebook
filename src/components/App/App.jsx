@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import shortid from "shortid";
+import toast, { Toaster } from 'react-hot-toast';
 import {AppWrapper} from "./App.styled";
 import { Form } from "components/Form";
 import { Filter } from "components/Filter";
@@ -16,16 +17,26 @@ export class App extends Component {
         filter:'',
     }
   
-    addContacts = ({name, number}) => {  
-      const contact = {
-        id: shortid.generate(),
-        name,
-        number
-      };
-  
-      this.setState(({contacts}) => ({
-        contacts: [contact, ...contacts],
-      }));
+    addContacts = ({name, number}) => {
+      // console.log("name", name);
+      const {contacts} = this.state;
+      const normalizedName = name.toLowerCase();
+      const findName = contacts.find(contact => contact.name.toLocaleLowerCase() === normalizedName);
+      // console.log("normalizedName", normalizedName);
+      // console.log("findName", findName);
+      if (findName !== undefined) {
+        toast.error(`${name} is already in contacts`);
+      } else {
+          const contact = {
+          id: shortid.generate(),
+          name,
+          number
+        };
+          this.setState(({contacts}) => ({
+          contacts: [contact, ...contacts],
+        }));
+      } 
+      
     };
 
     changeFilter = event => {
@@ -56,6 +67,7 @@ export class App extends Component {
         return (
             <AppWrapper>
                 <Form onSubmit={this.addContacts}/>
+                <Toaster />
                 <Filter value={filter} onChange={this.changeFilter}/>
                 <ContactsList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
             </AppWrapper>

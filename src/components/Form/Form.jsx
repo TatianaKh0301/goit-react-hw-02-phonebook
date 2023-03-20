@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import shortid from "shortid";
-import { FormWrapper } from "./Form.styled";
+import { FormWrapper, MainTitle, LabelForm, InputForm, ButtonForm } from "./Form.styled";
 
 export class Form extends Component {
     state = {
@@ -31,9 +31,9 @@ export class Form extends Component {
     render() {
         return(
             <FormWrapper onSubmit={this.handleSubmit}>
-                <h1>Phonebook</h1>
-                <label htmlFor={this.nameInputId}>Name
-                    <input
+                <MainTitle>Phonebook</MainTitle>
+                <LabelForm htmlFor={this.nameInputId}>Name
+                    <InputForm
                         type="text"
                         name="name"
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -44,9 +44,9 @@ export class Form extends Component {
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
-                </label>
-                <label htmlFor={this.numberInputId}>Phone
-                    <input
+                </LabelForm>
+                <LabelForm htmlFor={this.numberInputId}>Phone
+                    <InputForm
                         type="tel"
                         name="number"
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -57,8 +57,8 @@ export class Form extends Component {
                         value={this.state.number}
                         onChange={this.handleChange}
                         />
-                </label>
-                <button type="submit">Add contact</button>              
+                </LabelForm>
+                <ButtonForm type="submit">Add contact</ButtonForm>              
             </FormWrapper>
         );
     }
