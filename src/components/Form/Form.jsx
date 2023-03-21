@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import shortid from "shortid";
+import PropTypes from 'prop-types';
 import { FormWrapper, MainTitle, LabelForm, InputForm, ButtonForm } from "./Form.styled";
 
 export class Form extends Component {
@@ -63,3 +64,7 @@ export class Form extends Component {
         );
     }
 }; 
+
+Form.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}
