@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import shortid from "shortid";
-import toast, { Toaster } from 'react-hot-toast';
+// import shortid from "shortid";
+// import toast, { Toaster } from 'react-hot-toast';
 import {AppWrapper} from "./App.styled";
-import { Form } from "components/Form";
+import { FormAddContacts } from "components/FormAddContacts";
 import { Filter } from "components/Filter";
 import { ContactsList } from "components/ContactsList";
 
@@ -17,25 +17,29 @@ export class App extends Component {
         filter:'',
     }
   
-    addContacts = ({name, number}) => {
+    addContacts = (values) => {
+      const { name } = values;
       // console.log("name", name);
-      const {contacts} = this.state;
+      // const {contacts} = this.state;
       const normalizedName = name.toLowerCase();
-      const findName = contacts.find(contact => contact.name.toLocaleLowerCase() === normalizedName);
+      console.log("normalizedName", normalizedName);
+      // const findName = contacts.find(contact => contact.name.toLocaleLowerCase() === normalizedName);
       // console.log("normalizedName", normalizedName);
       // console.log("findName", findName);
-      if (findName !== undefined) {
-        toast.error(`${name} is already in contacts`);
-      } else {
-          const contact = {
-          id: shortid.generate(),
-          name,
-          number
-        };
-          this.setState(({contacts}) => ({
-          contacts: [contact, ...contacts],
-        }));
-      } 
+      // if (findName !== undefined) {
+      //   toast.error(`${name} is already in contacts`);
+      // } 
+      // else {console.log("add contact", name)}
+      // {
+      //     const contact = {
+      //     id: shortid.generate(),
+      //     name,
+      //     number
+      //   };
+      //     this.setState(({contacts}) => ({
+      //     contacts: [contact, ...contacts],
+      //   }));
+      // } 
       
     };
 
@@ -66,8 +70,8 @@ export class App extends Component {
 
         return (
             <AppWrapper>
-                <Form onSubmit={this.addContacts}/>
-                <Toaster />
+                <FormAddContacts onSubmit={this.addContacts}/>
+                {/* <Toaster /> */}
                 <Filter value={filter} onChange={this.changeFilter}/>
                 <ContactsList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
             </AppWrapper>
